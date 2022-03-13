@@ -1,0 +1,36 @@
+{
+    "name": "apnic/foundation-news",
+    "require": {
+        "php": "7.4.*",
+        "ext-simplexml": "*",
+        "guzzlehttp/guzzle": "7.4.1",
+        "ext-dom": "*"
+    },
+    "require-dev": {
+        "mleko/wingman": "0.3.1",
+        "phpunit/phpunit": "9.5.11",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "3.6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "APNIC\\FoundationNews\\": "src/php/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "APNIC\\FoundationNews\\": "test/unit/php/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "format": "phpcbf",
+        "lint": "phpcs -p",
+        "test": "phpunit",
+        "post-update-cmd": [
+            "Mleko\\Wingman\\Composer\\EventHandler::format"
+        ]
+    }
+}

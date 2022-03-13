@@ -1,0 +1,29 @@
+---
+services:
+    web:
+        build:
+            context: "."
+        container_name: "apnic_foundation_news_web"
+        restart: "always"
+        depends_on:
+            - "db"
+        ports:
+            - "8080:80"
+        environment:
+            WORDPRESS_DB_HOST: "db"
+            WORDPRESS_DB_USER: "apnic_foundation_news"
+            WORDPRESS_DB_PASSWORD: "apnic_foundation_news"
+            WORDPRESS_DB_NAME: "apnic_foundation_news"
+        volumes:
+            - "./src/:/var/www/html/wp-content/plugins/apnic-foundation-news/src/"
+            - "./src/theme/:/var/www/html/wp-content/themes/apnic-foundation-news/"
+    db:
+        image: "mysql:5.7"
+        container_name: "apnic_foundation_news_db"
+        restart: "always"
+        platform: "linux/x86_64"
+        environment:
+            MYSQL_DATABASE: "apnic_foundation_news"
+            MYSQL_USER: "apnic_foundation_news"
+            MYSQL_PASSWORD: "apnic_foundation_news"
+            MYSQL_RANDOM_ROOT_PASSWORD: "1"
